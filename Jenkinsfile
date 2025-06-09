@@ -47,13 +47,8 @@ pipeline {
                         sh 'npm test'
                     }
                 }
-
-
             }
         }
-
-
-
 
         stage('Test'){
             agent {
@@ -92,5 +87,6 @@ pipeline {
         always {
             junit 'test-results/junit.xml'
         }
+    }
     }
 }
