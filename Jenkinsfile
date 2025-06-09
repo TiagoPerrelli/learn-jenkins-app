@@ -31,8 +31,11 @@ pipeline {
                 sh 'test -f build/index.html'
                 sh 'npm test'
             }
-            
-
+        }
+    }
+    post {
+        always {
+            junit 'test-results/junit.xml'
         }
     }
 }
