@@ -43,7 +43,8 @@ pipeline {
             steps{
                 sh '''
                     npm install -g serv
-                    node_modules/.bin/serve -s build
+                    node_modules/.bin/serve -s build &
+                    sleep 10
                     npx playwright test
 
                 '''
