@@ -63,7 +63,7 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Build') {
+        stage('Deploy') {
             agent {
                 docker {
                     image 'node:18-alpine'
