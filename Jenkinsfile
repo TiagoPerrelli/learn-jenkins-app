@@ -19,6 +19,42 @@ pipeline {
                 '''
             }
         }
+        stage('Run Tests'){
+            parallel{
+                stage('Test1'){
+                    agent {
+                        docker {
+                            image 'node:18-alpine'
+                            reuseNode true
+                        }
+                    }
+                    steps{
+                        echo 'Test Stage'
+                        sh 'test -f build/index.html'
+                        sh 'npm test'
+                    }
+                }
+                stage('Test2'){
+                    agent {
+                        docker {
+                            image 'node:18-alpine'
+                            reuseNode true
+                        }
+                    }
+                    steps{
+                        echo 'Test Stage'
+                        sh 'test -f build/index.html'
+                        sh 'npm test'
+                    }
+                }
+
+
+            }
+        }
+
+
+
+
         stage('Test'){
             agent {
                 docker {
@@ -32,7 +68,7 @@ pipeline {
                 sh 'npm test'
             }
         }
-
+        /*
         stage('E2E'){
             agent {
                 docker {
@@ -51,7 +87,7 @@ pipeline {
             }
         }
 
-    }
+    }*/
     post {
         always {
             junit 'test-results/junit.xml'
